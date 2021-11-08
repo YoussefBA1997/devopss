@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Mission implements Serializable {
 	@ManyToOne
 	private Departement departement;
 	
-	@OneToMany(mappedBy="mission")
+	@OneToMany(mappedBy="mission" , fetch = FetchType.EAGER)
 	private  List<Timesheet> timesheets;
 	
 	public Mission() {
@@ -38,6 +39,17 @@ public class Mission implements Serializable {
 		this.description = description;
 	}
 	
+	
+	
+
+	public Mission(int id, String name, String description, Departement departement, List<Timesheet> timesheets) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.departement = departement;
+		this.timesheets = timesheets;
+	}
 
 	public int getId() {
 		return id;
@@ -79,6 +91,10 @@ public class Mission implements Serializable {
 		this.timesheets = timesheets;
 	}
 	
+	public String toString(){
+		return "id :" +id +"name :" +name+"description :" +description+"departement :" +departement +"timesheets"+timesheets;
+		
+	}
 	
 
 }
